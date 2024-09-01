@@ -1,34 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import BookSelector from "./components/BookSelector";
+import {calculatePrice} from "./utils/calculatePrice";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [books, setBooks] = useState([0, 0, 0, 0]);
+  const totalPrice = calculatePrice(books);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+    <div className="container align-items-center">
+       <h1 className="text-center my-4">Potter Book Store</h1>
+        <div className="card p-4 shadow-sm">
+          <h3 className="text-center mb-5">Build Your Potter Collection</h3>
+          <BookSelector books={books} setBooks={setBooks} />
+          <h4 className="text-center mt-4">Total Price: €{totalPrice.toFixed(2)}</h4>
+        </div>
+        <p className="mt-4 discount-note">
+          *Save up to 25% by buying different books: 5% for 2, 10% for 3, 20% for 4, 25% for all 5.
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
